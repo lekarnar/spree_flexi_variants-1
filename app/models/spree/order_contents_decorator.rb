@@ -2,7 +2,7 @@ module Spree
   OrderContents.class_eval do
     # Get current line item for variant if exists
     # Add variant qty to line_item
-    
+
     def add(variant, quantity = 1, options = {}, ad_hoc_option_value_ids = [], product_customizations = [])
       timestamp = Time.now
       line_item = add_to_line_item(variant, quantity, options, ad_hoc_option_value_ids, product_customizations)
@@ -18,11 +18,15 @@ module Spree
           line_item.quantity += quantity.to_i
           line_item.currency = currency unless currency.nil?
         else
-          opts = { currency: order.currency }.merge ActionController::Parameters.new(options).
-                                              permit(PermittedAttributes.line_item_attributes)
-          line_item = order.line_items.new(quantity: quantity,
-                                            variant: variant,
-                                            options: opts)
+
+          opts = ActionController::Parameters.new(options.to_h).
+            permit(PermittedAttributes.line_item_attributes).to_h.
+            merge( { currency: order.currency } )
+
+            line_item = order.line_items.new(quantity: quantity,
+                                             variant: variant,
+                                             options: opts)
+
           line_item.product_customizations = product_customizations
           product_customizations.each {|pc| pc.line_item = line_item}
           product_customizations.map(&:save)
@@ -45,7 +49,7 @@ module Spree
         line_item.save!
         line_item
       end
-  
+
       def grab_line_item_by_variant(variant, raise_error = false, options = {}, ad_hoc_option_value_ids, product_customizations)
         line_item = order.find_line_item_by_variant(variant, options, ad_hoc_option_value_ids, product_customizations)
 
