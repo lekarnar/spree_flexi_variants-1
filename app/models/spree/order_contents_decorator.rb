@@ -14,7 +14,7 @@ module Spree
       def add_to_line_item(variant, quantity, options = {}, ad_hoc_option_value_ids = [], product_customizations = [])
         line_item = grab_line_item_by_variant(variant, false, options)
 
-        if line_item && part_variants_match?(line_item, variant, quantity, options)
+        if line_item #&& part_variants_match?(line_item, variant, quantity, options)
           line_item.quantity += quantity.to_i
           line_item.currency = currency unless currency.nil?
         else

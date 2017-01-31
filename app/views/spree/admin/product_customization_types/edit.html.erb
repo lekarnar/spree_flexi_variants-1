@@ -8,19 +8,19 @@
 <% end %>
 
 <%= render :partial => 'spree/admin/shared/sub_menu/product' %>
-<h1><%= t("editing_product_customization_type") %></h1>
+<!-- <h1><%= Spree.t("editing_product_customization_type") %></h1> -->
 <%= render 'spree/shared/error_messages', :target => @product_customization_type %>
 <%= form_for(@product_customization_type, :url => admin_product_customization_type_url(@product_customization_type), :html => { :method => :put }) do |f| %>
 <fieldset>
-  <legend><%= t("editing_product_customization_type") %></legend>
+  <legend style="padding-top=20px;"><%= t("editing_product_customization_type") %></legend>
   <%= render :partial => "form", :locals => { :f => f } %>
   <h3><%= t("customizable_product_options") %></h3>
-  <table class="index">
+  <table class="table index">
     <thead>
       <tr>
-        <th><%= t("name") %></th>
-        <th><%= t("presentation") %></th>
-        <th><%= t("description") %></th>
+        <th><%= Spree.t("name") %></th>
+        <th><%= Spree.t("presentation") %></th>
+        <th><%= Spree.t("description") %></th>
         <th></th>
       </tr>
     </thead>

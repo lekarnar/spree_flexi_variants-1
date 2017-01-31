@@ -4,7 +4,7 @@
 
 <%= form_for(@product_customization_type, :url => admin_product_customization_types_url) do |f| %>
   <fieldset>
-    <legend><%= t("new_product_customization_type") %></legend>
+    <legend style="padding-top: 20px;"><%= Spree.t("new_product_customization_type") %></legend>
     <%= render :partial => "form", :locals => { :f => f } %>
 <!--     < %= render :partial => 'spree/admin/shared/new_resource_links' % >
 
