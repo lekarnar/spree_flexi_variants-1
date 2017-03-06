@@ -1,19 +1,19 @@
-<%= render :partial => 'spree/admin/shared/sub_menu/product' %>
-<h1><%= t("editing_option_type") %> "<%= @ad_hoc_option_type.option_type.presentation %>"</h1>
+<%#= render :partial => 'spree/admin/shared/sub_menu/product' %>
+<h1><%= Spree.t("editing_option_type") %> "<%= @ad_hoc_option_type.option_type.presentation %>"</h1>
 <%= render 'spree/shared/error_messages', :target => @ad_hoc_option_type %>
 <%= form_for(@ad_hoc_option_type, :url => object_url, :html => { :method => :put }) do |f| %>
 <fieldset>
-  <legend><%= t("editing_option_type") %></legend>
+  <legend><%= Spree.t("editing_option_type") %></legend>
   <%= render :partial => "form", :locals => { :f => f } %>
-  <h3><%= t("option_values") %></h3>
-  <table class="index sortable" data-sortable-link="<%= update_positions_admin_ad_hoc_option_type_ad_hoc_option_values_url(@ad_hoc_option_type) %>">
+  <h3><%= Spree.t("option_values") %></h3>
+  <table class="table table-bordered index sortable" data-sortable-link="<%= update_positions_admin_ad_hoc_option_type_ad_hoc_option_values_url(@ad_hoc_option_type) %>">
     <thead>
       <tr>
-        <th><%= t("name") %></th>
-        <th><%= t("display") %></th>
-        <th><%= t("price_modifier") %></th>
-        <th><%= t("cost_price_modifier") %></th>
-        <th><%= t("selected_by_default") %></th>
+        <th><%= Spree.t("name") %></th>
+        <th><%= Spree.t("display") %></th>
+        <th><%= Spree.t("price_modifier") %></th>
+        <th><%= Spree.t("cost_price_modifier") %></th>
+        <th><%= Spree.t("selected_by_default") %></th>
         <th class='actions'></th>
       </tr>
     </thead>

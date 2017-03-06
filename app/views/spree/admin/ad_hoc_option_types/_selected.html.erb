@@ -1,6 +1,6 @@
 <h3>Add Option Types</h3>
 <p>These can be used to dynamically create ad hoc variants</p>
-<table class="index">
+<table class="table table-bordered index">
   <thead>
     <tr>
       <th><%= t("name") %></th>
@@ -38,5 +38,5 @@
 <div id="option-types"></div>
 <span id="new_opt_link">
   <!-- THIS pulls up the 'available' list below -->
-  <%= button_link_to t("add_option_type"), available_ad_hoc_admin_product_option_types_url(@product), :remote => :true, :class => 'iconlink', :icon => 'icon-plus' %>
+  <%= button_link_to t("add_option_type"), available_ad_hoc_admin_product_option_types_url(@product), :remote => :true, :class => 'iconlink btn btn-primary', :icon => 'icon-plus' %>
 </span>

@@ -1,13 +1,13 @@
 <% # first two are read only (come from opiton_type.rb) %>
-<h3><%= t("name") %>: <%= f.object.option_type.name%></h3>
-<h3><%= t("presentation") %>: <%= f.object.option_type.presentation%></h3>
+<h4><%= Spree.t("name") %>: <%= f.object.option_type.name%></h4>
+<h4><%= Spree.t("presentation") %>: <%= f.object.option_type.presentation%></h4>
 <%= f.field_container :is_required do %>
-  <%= f.label :position, t("position_within_product") %><br />
+  <%= f.label :position, Spree.t("position_within_product") %><br />
   <%= f.number_field :position %>
   <%= f.error_message_on :position %>
 <% end %>
 <%= f.field_container :is_required do %>
-  <%= f.label :is_required, t("required") %> <span class="required">*</span><br />
+  <%= f.label :is_required, Spree.t("required") %> <span class="required">*</span><br />
   <%= f.check_box :is_required %>
   <%= f.error_message_on :is_required %>
 <% end %>
