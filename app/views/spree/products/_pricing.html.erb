@@ -132,6 +132,35 @@
     $('.price.selling').text("$" + cur_price.toFixed(2));
   }
 
+  function ad_hoc_options_checked() {
+    var missing_check = false;
+    $("#ad_hoc_options select.ad-hoc-option-select").each(function() {
+      if ($(this).hasClass("required")) {
+        $(this).find("option").each(function() {
+          if ($(this).is(':selected')) {
+            if ($(this).val() == "") {
+              missing_check = true;
+            }
+          }
+        });
+      }
+    });
+    if (missing_check) {
+      return false;
+    }
+    return true;
+  }
+
+  $(function() {
+    $("button#add-to-cart-button").click(function () {
+      console.log("maja");
+      if (!ad_hoc_options_checked()) {
+        alert("Preverite ali ste izbrali obvezne možnosti izdelka");
+        return false;
+      }
+    });
+  });
+
   //]]>
   </script>
 <%# end if SpreeFlexiVariants::Config[:use_javascript_pricing_updates] %>
