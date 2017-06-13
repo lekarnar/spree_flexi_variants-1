@@ -3,7 +3,7 @@
 <%= render 'spree/shared/error_messages', :target => @ad_hoc_option_type %>
 <%= form_for(@ad_hoc_option_type, :url => object_url, :html => { :method => :put }) do |f| %>
 <fieldset>
-  <legend><%= Spree.t("editing_option_type") %></legend>
+  <!-- <legend><%#= Spree.t("editing_option_type") %></legend> -->
   <%= render :partial => "form", :locals => { :f => f } %>
   <h3><%= Spree.t("option_values") %></h3>
   <table class="table table-bordered index sortable" data-sortable-link="<%= update_positions_admin_ad_hoc_option_type_ad_hoc_option_values_url(@ad_hoc_option_type) %>">
@@ -42,9 +42,9 @@
   <% end %>
 
   <div class="form-buttons filter-actions actions">
-    <%= button t("update"), 'icon-refresh' %>
-    <span class='or'><%= t("or") %></span>
-    <%= button_link_to t("cancel"), selected_admin_product_ad_hoc_option_types_url(@ad_hoc_option_type.product), :icon => 'icon-remove' %>
+    <%= button Spree.t("update"), 'icon-refresh' %>
+    <span class='or'><%= Spree.t("or") %></span>
+    <%= button_link_to Spree.t("cancel"), selected_admin_product_ad_hoc_option_types_url(@ad_hoc_option_type.product), :icon => 'icon-remove' %>
   </div>
 </fieldset>
 <% end %>

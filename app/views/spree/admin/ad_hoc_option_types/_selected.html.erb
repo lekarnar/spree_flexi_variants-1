@@ -1,11 +1,11 @@
-<h3>Add Option Types</h3>
-<p>These can be used to dynamically create ad hoc variants</p>
+<h3><%= t('ad_hoc_option_types') %></h3>
+<p><%= t('ad_hoc_option_types_description') %></p>
 <table class="table table-bordered index">
   <thead>
     <tr>
-      <th><%= t("name") %></th>
-      <th><%= t("presentation") %></th>
-      <th><%= t("required") %></th>
+      <th><%= Spree.t("name") %></th>
+      <th><%= Spree.t("presentation") %></th>
+      <th><%= Spree.t("required") %></th>
       <th class='actions'></th>
     </tr>
   </thead>
@@ -31,12 +31,12 @@
     <% end %>
   </tbody>
   <% if @option_types.empty? %>
-  <tr><td colspan="3"><%= t(:none) %></td></tr>
+  <tr><td colspan="3"><%= Spree.t(:none) %></td></tr>
   <% end %>
 </table>
 
 <div id="option-types"></div>
 <span id="new_opt_link">
   <!-- THIS pulls up the 'available' list below -->
-  <%= button_link_to t("add_option_type"), available_ad_hoc_admin_product_option_types_url(@product), :remote => :true, :class => 'iconlink btn btn-primary', :icon => 'icon-plus' %>
+  <%= button_link_to Spree.t("add_option_type"), available_ad_hoc_admin_product_option_types_url(@product), :remote => :true, :class => 'iconlink btn btn-primary', :icon => 'icon-plus' %>
 </span>
