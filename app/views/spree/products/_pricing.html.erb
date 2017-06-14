@@ -6,7 +6,6 @@
   <script type="text/javascript">
     //<![CDATA[
     // First I need to set up a mapping for the variants on the screen so I can easily grab their prices
-
     var variant_price_map={};
 
     <% if @product.has_variants? %>
@@ -41,7 +40,7 @@
       };
     })();
 
-    $(document).on('page:change', function(event) {
+    $(document).on('ready', function(event) {
 
       // watch for variant changes
       $(".option-value").click(function() {
@@ -50,7 +49,6 @@
 
       // 'watch' our configurations
       $('.ad-hoc-option-select').change(function() {
-
         // get _every_ option drop down and recalculate product price
         // do this immediately, since we are not waiting on the results of the exlusions post
         updatePrice();
@@ -160,7 +158,6 @@
       }
     });
   });
-
   //]]>
   </script>
 <%# end if SpreeFlexiVariants::Config[:use_javascript_pricing_updates] %>
