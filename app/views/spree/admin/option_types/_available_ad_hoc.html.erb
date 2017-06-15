@@ -1,9 +1,9 @@
-<h4><%= t("add_option_types") %></h4>
+<h4><%= Spree.t("add_option_types") %></h4>
 <table class="table table-bordered index">
   <thead>
     <tr>
-      <th><%= t("name") %></th>
-      <th><%= t("presentation") %></th>
+      <th><%= Spree.t("name") %></th>
+      <th><%= Spree.t("presentation") %></th>
       <th class='actions'></th>
     </tr>
   </thead>
@@ -12,7 +12,7 @@
       <tr>
         <td><%=ot.name %></td>
         <td><%=ot.presentation %></td>
-        <td class="actions"><%= link_to_with_icon 'icon-plus', t("select"),
+        <td class="actions"><%= link_to_with_icon 'icon-plus', Spree.t("select"),
           url_for(:controller => "admin/option_types",
                   :id => ot,
                   :product_id => @product.id,
@@ -24,7 +24,7 @@
     <% end %>
     <% if @available_option_types.empty? %>
       <tr>
-        <td colspan="3"><%= t('none_available') %></td>
+        <td colspan="3"><%= Spree.t('none_available') %></td>
       </tr>
     <% end %>
   </tbody>
