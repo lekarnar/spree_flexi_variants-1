@@ -55,109 +55,109 @@
       });
 
       updatePrice(); // set the initial price
-      } // ready
-    ); // ready
-
-  // stolen from http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
-  function isNumeric(input) {
-    return (input - 0) == input && input.length > 0;
-  }
-
-  function compute_variant_price_diff(base_price) {
-    var variant_price=0;
-
-    variant_price=variant_price_map[$("#variant_id").val()];
-    if (isNaN(variant_price)) {
-      variant_price=0;
-    };
-
-    <% if @product.has_variants? %>
-      return variant_price-base_price;
-    <% else %>
-      return variant_price;  // don't return a negative number if we don't have any variants
-    <% end %>
-
-  }
-
-  function compute_configuration_price() {
-    var configuration_price=0;
-
-    // for selects or checkboxes
-    $("select.ad-hoc-option-select, input:checked.ad-hoc-option-select").each(function() {
-      // the :prompt=>'None' in the select tag yields an empty string, which I can't use in the price calcuation
-      var val=$(this).val();
-
-      // now in case we are a multiple select, de-array
-      if ($.isArray(val)) {
-        $.each(val, function(index, value) {
-          if (isNumeric(value)) {
-            configuration_price+=price_modifier_map[value];
-          }
-        });
-      } else {
-        if (isNumeric(val)) {
-          configuration_price+=price_modifier_map[val];
-        }
-      }
-    });
-
-    return configuration_price;
-  }
-
-  function compute_customization_price() {
-    var price=0;
-
-    // for selects or checkboxes
-    $(".customization_price").each(function() {
-      var val=$(this).val();
-
-      if (isNumeric(val)) {
-        price  +=  parseFloat(val);
-      }
-    });
-
-    return price;
-  }
+    }); // ready
 
 
-  function updatePrice() {
-
-    var cur_variant_price_diff = compute_variant_price_diff(base_price);
-    var cur_configuration_price =  compute_configuration_price();
-    var cur_customization_price =  compute_customization_price();
-    var cur_price =base_price + cur_variant_price_diff + cur_configuration_price + cur_customization_price;
-
-    $('#product-price .price.selling').text(String(cur_price.toFixed(2)).replace(".",",")+" €");
-  }
-
-  function ad_hoc_options_checked() {
-    var missing_check = false;
-    $("#ad_hoc_options select.ad-hoc-option-select").each(function() {
-      if ($(this).hasClass("required")) {
-        $(this).find("option").each(function() {
-          if ($(this).is(':selected')) {
-            if ($(this).val() == "") {
-              missing_check = true;
-            }
-          }
-        });
-      }
-    });
-    if (missing_check) {
-      return false;
+    // stolen from http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+    function isNumeric(input) {
+      return (input - 0) == input && input.length > 0;
     }
-    return true;
-  }
 
-  $(function() {
-    $("button#add-to-cart-button").click(function () {
-      console.log("maja");
-      if (!ad_hoc_options_checked()) {
-        alert("Preverite ali ste izbrali obvezne možnosti izdelka");
+    function compute_variant_price_diff(base_price) {
+      var variant_price=0;
+
+      variant_price=variant_price_map[$("#variant_id").val()];
+      if (isNaN(variant_price)) {
+        variant_price=0;
+      };
+
+      <% if @product.has_variants? %>
+        return variant_price-base_price;
+      <% else %>
+        return variant_price;  // don't return a negative number if we don't have any variants
+      <% end %>
+
+    }
+
+    function compute_configuration_price() {
+      var configuration_price=0;
+
+      // for selects or checkboxes
+      $("select.ad-hoc-option-select, input:checked.ad-hoc-option-select").each(function() {
+        // the :prompt=>'None' in the select tag yields an empty string, which I can't use in the price calcuation
+        var val=$(this).val();
+
+        // now in case we are a multiple select, de-array
+        if ($.isArray(val)) {
+          $.each(val, function(index, value) {
+            if (isNumeric(value)) {
+              configuration_price+=price_modifier_map[value];
+            }
+          });
+        } else {
+          if (isNumeric(val)) {
+            configuration_price+=price_modifier_map[val];
+          }
+        }
+      });
+
+      return configuration_price;
+    }
+
+    function compute_customization_price() {
+      var price=0;
+
+      // for selects or checkboxes
+      $(".customization_price").each(function() {
+        var val=$(this).val();
+
+        if (isNumeric(val)) {
+          price  +=  parseFloat(val);
+        }
+      });
+
+      return price;
+    }
+
+
+    function updatePrice() {
+
+      var cur_variant_price_diff = compute_variant_price_diff(base_price);
+      var cur_configuration_price =  compute_configuration_price();
+      var cur_customization_price =  compute_customization_price();
+      var cur_price =base_price + cur_variant_price_diff + cur_configuration_price + cur_customization_price;
+
+      $('#product-price .price.selling').text(String(cur_price.toFixed(2)).replace(".",",")+" €");
+    }
+
+    function ad_hoc_options_checked() {
+      var missing_check = false;
+      $("#ad_hoc_options select.ad-hoc-option-select").each(function() {
+        if ($(this).hasClass("required")) {
+          $(this).find("option").each(function() {
+            if ($(this).is(':selected')) {
+              if ($(this).val() == "") {
+                missing_check = true;
+              }
+            }
+          });
+        }
+      });
+      if (missing_check) {
         return false;
       }
+      return true;
+    }
+
+    $(function() {
+      $("button#add-to-cart-button").click(function () {
+        console.log("maja");
+        if (!ad_hoc_options_checked()) {
+          alert('Preverite, ali ste izbrali obvezne možnosti izdelka.');
+          return false;
+        }
+      });
     });
-  });
   //]]>
   </script>
 <%# end if SpreeFlexiVariants::Config[:use_javascript_pricing_updates] %>
