@@ -20,7 +20,7 @@
 
     // 'updatePrice()' takes the base price + current 'configuration' adjustments + 'customization' adjustments
 
-    var base_price=<%= @product.price %>;
+    var base_price=<%= @product.real_price %>;
 
     // keep track of ad_hoc adjustments
     var price_modifier_map={};
