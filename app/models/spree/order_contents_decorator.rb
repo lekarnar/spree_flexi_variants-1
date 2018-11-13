@@ -20,14 +20,26 @@ module Spree
         line_item = grab_line_item_by_variant(variant, false, options, ad_hoc_option_value_ids, product_customizations)
 
         if line_item #&& part_variants_match?(line_item, variant, quantity, options)
-          line_item.quantity += quantity.to_i
+          if line_item.variant.product.limit1 && line_item.quantity >= 1
+            line_item.quantity = 1
+          elsif line_item.variant.product.limit3 && line_item.quantity >= 3
+            line_item.quantity = 3
+          else
+            line_item.quantity += quantity.to_i
+          end
+
           line_item.currency = currency unless currency.nil?
         else
 
           opts = ActionController::Parameters.new(options.to_h).
             permit(PermittedAttributes.line_item_attributes).to_h.
             merge( { currency: order.currency } )
-
+            if variant.product.limit1 && quantity > 1
+              quantity = 1
+            end
+            if variant.product.limit3 && quantity > 3
+              quantity = 3
+            end
             line_item = order.line_items.new(quantity: quantity,
                                              variant: variant,
                                              options: opts)
